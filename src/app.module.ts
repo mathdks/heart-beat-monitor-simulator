@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MeasurementsModule } from './measurements/measurements.module';
+import { IrregularitiesModule } from './irregularities/irregularities.module';
 import databaseConfig from 'config/database.config';
 
 @Module({
@@ -19,6 +21,8 @@ import databaseConfig from 'config/database.config';
         ...configService.get('database'),
       }),
     }),
+    MeasurementsModule,
+    IrregularitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
