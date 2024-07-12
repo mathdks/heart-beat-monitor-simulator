@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   app:
+    container_name: 'app'
     build:
       context: .
       dockerfile: ${DOCKERFILE:-Dockerfile.dev}
@@ -11,8 +12,11 @@ services:
       - .env
     depends_on:
       - db
+    volumes:
+      - ./database/migrations:/usr/src/app/database/migrations
 
   db:
+    container_name: 'db'
     image: postgres:13
     environment:
       POSTGRES_USER: postgres
