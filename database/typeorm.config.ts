@@ -4,7 +4,7 @@ import { DataSource } from 'typeorm';
 config();
 
 export default new DataSource({
-  database: process.env.DB_NAME,
+  database: process.env.DB_DATABASE,
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT, 10),
   username: process.env.DB_USERNAME,
