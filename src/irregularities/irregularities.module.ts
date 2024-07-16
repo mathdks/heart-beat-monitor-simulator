@@ -6,6 +6,7 @@ import { CreateIrregularityUseCase } from './application/use-cases/createIrregul
 import { IrregularityRepository } from './domain/repository/irregularity.repository';
 import { IrregularityAdapter } from './infra/adapters/irregularity.adapter';
 import { FinishIrregularityUseCase } from './application/use-cases/finishIrregularity.use-case';
+import { FindAllIrregularitiesUseCase } from './application/use-cases/findAllIrregularities.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Irregularity])],
@@ -13,6 +14,7 @@ import { FinishIrregularityUseCase } from './application/use-cases/finishIrregul
   providers: [
     CreateIrregularityUseCase,
     FinishIrregularityUseCase,
+    FindAllIrregularitiesUseCase,
     {
       provide: IrregularityRepository,
       useClass: IrregularityAdapter,
