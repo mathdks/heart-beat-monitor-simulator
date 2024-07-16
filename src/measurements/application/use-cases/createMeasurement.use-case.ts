@@ -25,10 +25,11 @@ export class CreateMeasurementUseCase {
 
     measurement.baseline = baseline;
 
-    if (
-      measurement.value < 1.2 * baseline ||
-      measurement.value > 0.8 * baseline
-    ) {
+    const absoluteDifference = Math.abs(measurement.value - baseline);
+
+    const percentageDifference = (absoluteDifference / baseline) * 100;
+
+    if (percentageDifference > 20) {
       measurement.is_irregular = true;
     }
 
