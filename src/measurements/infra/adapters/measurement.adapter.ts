@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Measurement } from 'src/measurements/domain/entities/measurement.entity';
 import { MeasurementRepository } from 'src/measurements/domain/repository/measurements.repository';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 
 export class MeasurementAdapter implements MeasurementRepository {
   constructor(
@@ -14,7 +14,14 @@ export class MeasurementAdapter implements MeasurementRepository {
   }
 
   findAll(): Promise<Measurement[]> {
-    throw new Error('Method not implemented.');
+    return this.measurementRepository.find({
+      where: {
+        timestamp: MoreThan(new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)),
+      },
+      order: {
+        id: 'ASC',
+      },
+    });
   }
 
   async findLast60AndCount(): Promise<number> {
