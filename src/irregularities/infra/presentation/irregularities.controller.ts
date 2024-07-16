@@ -1,11 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
+import { FindAllIrregularitiesUseCase } from 'src/irregularities/application/use-cases/findAllIrregularities.use-case';
 
 @Controller('irregularities')
 export class IrregularitiesController {
-  constructor() {}
+  constructor(
+    private readonly findAllIrregularitiesUseCase: FindAllIrregularitiesUseCase,
+  ) {}
 
   @Get()
   getIrregularities() {
-    return 'Get irregularities';
+    return this.findAllIrregularitiesUseCase.execute();
   }
 }
